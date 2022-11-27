@@ -1,0 +1,23 @@
+<%= render 'books/sidebox', book: @book, user: @user %>
+
+<div class="col-md-8 offset-md-1">
+ <h2>Book detail</h2>
+    <table class="table table-hover table-inverse">
+      <thead>
+          <tr>
+            <td>
+              <%= link_to user_path(@user.id) do %>
+                <%= image_tag @user.get_image(100,100) %><br>
+                <%= @user.name %>  
+              <% end %>
+            </td>
+            <td><%= link_to @book_show.title, book_path(@book_show.id) %></td>
+            <td><%= @book_show.body %></td>
+            <% if @book_show.user == current_user %>
+              <td><%= link_to "Edit", edit_book_path(@book_show.id), class: "btn btn-success btn-sm text-white" %></td>
+              <td>
+                <%= link_to "Destroy",book_path(@book_show.id), method: :delete, "data-confirm" => "本当に削除しますか？" ,class: "btn btn-danger btn-sm text-white"%>
+            <% end %>  
+            </td>
+          </tr>
+      </thead>
